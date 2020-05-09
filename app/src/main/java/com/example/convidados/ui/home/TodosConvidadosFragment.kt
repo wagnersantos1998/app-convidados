@@ -1,4 +1,4 @@
-package com.example.convidados.ui.gallery
+package com.example.convidados.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.convidados.R
 
-class GalleryFragment : Fragment() {
+class TodosConvidadosFragment : Fragment() {
 
-    private lateinit var galleryViewModel: GalleryViewModel
+    private lateinit var todosConvidadosViewModel: TodosConvidadosViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        galleryViewModel =
-                ViewModelProviders.of(this).get(GalleryViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_gallery, container, false)
-        val textView: TextView = root.findViewById(R.id.text_gallery)
-        galleryViewModel.text.observe(viewLifecycleOwner, Observer {
+        todosConvidadosViewModel =
+                ViewModelProviders.of(this).get(TodosConvidadosViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_home, container, false)
+        val textView: TextView = root.findViewById(R.id.text_home)
+        todosConvidadosViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

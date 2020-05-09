@@ -1,13 +1,13 @@
-package com.example.convidados.ui.home
+package com.example.convidados.ui.slideshow
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class ConvidadosPresentesViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+        value = "Tela de Convidados presentes no evento"
     }
     val text: LiveData<String> = _text
 }
