@@ -20,7 +20,7 @@ class FormConvidadosViewModel(application: Application) : AndroidViewModel(appli
     fun salvar(nome: String, presenca: Boolean) {
 
         var pessoa =
-            PessoaModel(nome, presenca)
+            PessoaModel(nome = nome, presenca = presenca)
         mPessoaRepository.salvarPessoa(pessoa)
     }
 

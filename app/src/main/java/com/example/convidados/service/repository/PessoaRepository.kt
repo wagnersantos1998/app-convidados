@@ -25,7 +25,7 @@ class PessoaRepository private constructor(context: Context) {
 
             val inserirValores = ContentValues()
 
-            inserirValores.put(DataBaseConstants.PESSOA.COLUNAS.NOME, pessoaModel.name)
+            inserirValores.put(DataBaseConstants.PESSOA.COLUNAS.NOME, pessoaModel.nome)
             inserirValores.put(DataBaseConstants.PESSOA.COLUNAS.PRESENCA, pessoaModel.presenca)
 
             db.insert(DataBaseConstants.PESSOA.TABLE_NAME, null, inserirValores)
@@ -43,7 +43,7 @@ class PessoaRepository private constructor(context: Context) {
 
             val inserirValores = ContentValues()
 
-            inserirValores.put(DataBaseConstants.PESSOA.COLUNAS.NOME, pessoaModel.name)
+            inserirValores.put(DataBaseConstants.PESSOA.COLUNAS.NOME, pessoaModel.nome)
             inserirValores.put(DataBaseConstants.PESSOA.COLUNAS.PRESENCA, pessoaModel.presenca)
 
             val selecao = DataBaseConstants.PESSOA.COLUNAS.ID + " = ?"
@@ -57,7 +57,19 @@ class PessoaRepository private constructor(context: Context) {
         }
     }
 
-    fun deletarPessoa(pessoaModel: PessoaModel) {
+    fun deletarPessoa(pessoaModel: PessoaModel): Boolean {
+        return try {
+            val db = mDatabase.writableDatabase
+
+            val selecao = DataBaseConstants.PESSOA.COLUNAS.ID + " = ?"
+            val args = arrayOf(pessoaModel.id.toString())
+
+            db.delete(DataBaseConstants.PESSOA.TABLE_NAME, selecao, args)
+
+            true
+        } catch (e: Exception) {
+            false
+        }
     }
 
 

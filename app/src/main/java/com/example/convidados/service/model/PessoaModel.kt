@@ -1,3 +1,3 @@
 package com.example.convidados.service.model
 
-data class PessoaModel(val id: Int,var name: String, var presenca: Boolean)
+data class PessoaModel(val id: Int = 0,var nome: String, var presenca: Boolean)
