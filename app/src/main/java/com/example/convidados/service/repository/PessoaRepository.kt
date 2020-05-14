@@ -20,7 +20,7 @@ class PessoaRepository private constructor(context: Context) {
     }
 
     fun salvarPessoa(pessoaModel: PessoaModel): Boolean {
-        try {
+        return try {
             val db = mDatabase.writableDatabase
 
             val inserirValores = ContentValues()
@@ -30,18 +30,36 @@ class PessoaRepository private constructor(context: Context) {
 
             db.insert(DataBaseConstants.PESSOA.TABLE_NAME, null, inserirValores)
 
-            return true
+            true
         } catch (e: Exception) {
-            return false
+            false
         }
 
+    }
+
+    fun atualizarPessoa(pessoaModel: PessoaModel): Boolean {
+        return try {
+            val db = mDatabase.writableDatabase
+
+            val inserirValores = ContentValues()
+
+            inserirValores.put(DataBaseConstants.PESSOA.COLUNAS.NOME, pessoaModel.name)
+            inserirValores.put(DataBaseConstants.PESSOA.COLUNAS.PRESENCA, pessoaModel.presenca)
+
+            val selecao = DataBaseConstants.PESSOA.COLUNAS.ID + " = ?"
+            val args = arrayOf(pessoaModel.id.toString())
+
+            db.update(DataBaseConstants.PESSOA.TABLE_NAME, inserirValores, selecao, args)
+
+            true
+        } catch (e: Exception) {
+            false
+        }
     }
 
     fun deletarPessoa(pessoaModel: PessoaModel) {
     }
 
-    fun atualizarPessoa(pessoaModel: PessoaModel) {
-    }
 
     fun listarTodasPessoa(): List<PessoaModel> {
         val list: MutableList<PessoaModel> = ArrayList()
