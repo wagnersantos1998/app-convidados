@@ -119,16 +119,137 @@ class PessoaRepository private constructor(context: Context) {
 
     fun listarTodasPessoa(): List<PessoaModel> {
         val list: MutableList<PessoaModel> = ArrayList()
-        return list
+
+        return try {
+            val db = mDatabase.readableDatabase
+
+            val projecao = arrayOf(
+                DataBaseConstants.PESSOA.COLUNAS.ID,
+                DataBaseConstants.PESSOA.COLUNAS.NOME, DataBaseConstants.PESSOA.COLUNAS.PRESENCA
+            )
+
+            val cursor = db.query(
+                DataBaseConstants.PESSOA.TABLE_NAME,
+                projecao,
+                null,
+                null,
+                null,
+                null,
+                null
+            )
+
+            if (cursor != null && cursor.count > 0) {
+                while (cursor.moveToNext()) {
+
+                    val id =
+                        cursor.getInt(cursor.getColumnIndex(DataBaseConstants.PESSOA.COLUNAS.ID))
+                    val nome =
+                        cursor.getString(cursor.getColumnIndex(DataBaseConstants.PESSOA.COLUNAS.NOME))
+                    val presenca =
+                        (cursor.getInt(cursor.getColumnIndex(DataBaseConstants.PESSOA.COLUNAS.PRESENCA)) == 1)
+
+                    val pessoa = PessoaModel(id, nome, presenca)
+
+                    list.add(pessoa)
+                }
+            }
+
+            cursor?.close()
+            list
+
+        } catch (e: Exception) {
+            list
+        }
+
     }
 
     fun listarPessoaPresente(): List<PessoaModel> {
         val list: MutableList<PessoaModel> = ArrayList()
-        return list
+
+        return try {
+            val db = mDatabase.readableDatabase
+
+            val projecao = arrayOf(
+                DataBaseConstants.PESSOA.COLUNAS.ID,
+                DataBaseConstants.PESSOA.COLUNAS.NOME,
+                DataBaseConstants.PESSOA.COLUNAS.PRESENCA
+            )
+
+            val condicao = DataBaseConstants.PESSOA.COLUNAS.PRESENCA + " = 1"
+
+            val cursor = db.query(
+                DataBaseConstants.PESSOA.TABLE_NAME,
+                projecao,
+                condicao,
+                null,
+                null,
+                null,
+                null
+            )
+
+            if (cursor != null && cursor.count > 0) {
+                while (cursor.moveToNext()) {
+                    val id =
+                        cursor.getInt(cursor.getColumnIndex(DataBaseConstants.PESSOA.COLUNAS.ID))
+                    val nome =
+                        cursor.getString(cursor.getColumnIndex(DataBaseConstants.PESSOA.COLUNAS.NOME))
+                    val presenca =
+                        (cursor.getInt(cursor.getColumnIndex(DataBaseConstants.PESSOA.COLUNAS.PRESENCA)) == 1)
+
+                    val pessoa = PessoaModel(id, nome, presenca)
+                    list.add(pessoa)
+                }
+            }
+            cursor?.close()
+            list
+        } catch (e: Exception) {
+            list
+        }
     }
 
     fun listarPessoaAusente(): List<PessoaModel> {
+
         val list: MutableList<PessoaModel> = ArrayList()
-        return list
+
+        return try {
+            val db = mDatabase.readableDatabase
+
+            val projecao = arrayOf(
+                DataBaseConstants.PESSOA.COLUNAS.ID,
+                DataBaseConstants.PESSOA.COLUNAS.NOME,
+                DataBaseConstants.PESSOA.COLUNAS.PRESENCA
+            )
+
+            val condicao = DataBaseConstants.PESSOA.COLUNAS.PRESENCA + " = 0"
+
+            val cursor = db.query(
+                DataBaseConstants.PESSOA.TABLE_NAME,
+                projecao,
+                condicao,
+                null,
+                null,
+                null,
+                null
+            )
+
+            if (cursor != null && cursor.count > 0) {
+                while (cursor.moveToNext()) {
+                    val id =
+                        cursor.getInt(cursor.getColumnIndex(DataBaseConstants.PESSOA.COLUNAS.ID))
+                    val nome =
+                        cursor.getString(cursor.getColumnIndex(DataBaseConstants.PESSOA.COLUNAS.NOME))
+                    val presenca =
+                        (cursor.getInt(cursor.getColumnIndex(DataBaseConstants.PESSOA.COLUNAS.PRESENCA)) == 1)
+
+                    val pessoa = PessoaModel(id, nome, presenca)
+                    list.add(pessoa)
+                }
+            }
+            cursor?.close()
+            list
+        } catch (e: Exception) {
+            list
+        }
+
     }
 }
