@@ -21,7 +21,8 @@ class FormConvidadosViewModel(application: Application) : AndroidViewModel(appli
 
         var pessoa =
             PessoaModel(nome = nome, presenca = presenca)
-        mPessoaRepository.salvarPessoa(pessoa)
+
+        mSaveGuest.value = mPessoaRepository.salvarPessoa(pessoa)
     }
 
 }
