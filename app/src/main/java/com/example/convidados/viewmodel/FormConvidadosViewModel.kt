@@ -10,16 +10,16 @@ import com.example.convidados.service.repository.PessoaRepository
 
 class FormConvidadosViewModel(application: Application) : AndroidViewModel(application) {
 
-    private var mContext = application.applicationContext
-    private var mPessoaRepository: PessoaRepository =
+    private val mContext = application.applicationContext
+    private val mPessoaRepository: PessoaRepository =
         PessoaRepository.getInstance(mContext)
 
     private var mSaveGuest = MutableLiveData<Boolean>()
-    var saveGuest: LiveData<Boolean> = mSaveGuest
+    val saveGuest: LiveData<Boolean> = mSaveGuest
 
     fun salvar(nome: String, presenca: Boolean) {
 
-        var pessoa =
+        val pessoa =
             PessoaModel(nome = nome, presenca = presenca)
 
         mSaveGuest.value = mPessoaRepository.salvarPessoa(pessoa)

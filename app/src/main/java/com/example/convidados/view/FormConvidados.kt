@@ -19,14 +19,12 @@ class FormConvidados : AppCompatActivity() {
 
         mViewModel = ViewModelProvider(this).get(FormConvidadosViewModel::class.java)
 
-        observe()
-
         btnSalvar.setOnClickListener {
             var nome = edtNome.text.toString().toLowerCase()
             nome = nome.capitalize()
             validacao(nome)
         }
-
+        observe()
     }
 
     private fun validacao(nome: String) {
@@ -38,7 +36,7 @@ class FormConvidados : AppCompatActivity() {
                 mViewModel.salvar(nome, presente)
             } else if (rdAusente.isChecked) {
 
-                var ausente = rdAusente.isChecked
+                var ausente = false
 
                 mViewModel.salvar(nome, ausente)
             } else {

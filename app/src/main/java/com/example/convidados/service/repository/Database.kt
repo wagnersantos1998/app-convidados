@@ -18,9 +18,9 @@ class Database(context: Context) : SQLiteOpenHelper(context, NOME_BANCO, null, V
         private const val VERSAO = 1
 
         private const val CREATE_TABLE =
-            ("create table" + DataBaseConstants.PESSOA.TABLE_NAME + " ("
-                    + DataBaseConstants.PESSOA.COLUNAS.ID + "integer primary key autoincrement,"
+            ("create table " + DataBaseConstants.PESSOA.TABLE_NAME + " ("
+                    + DataBaseConstants.PESSOA.COLUNAS.ID + " integer primary key autoincrement, "
                     + DataBaseConstants.PESSOA.COLUNAS.NOME + " text, "
-                    + DataBaseConstants.PESSOA.COLUNAS.PRESENCA + "integer);")
+                    + DataBaseConstants.PESSOA.COLUNAS.PRESENCA + " integer);")
     }
 }
