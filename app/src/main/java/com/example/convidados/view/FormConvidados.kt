@@ -7,11 +7,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.convidados.viewmodel.FormConvidadosViewModel
 import com.example.convidados.R
+import com.example.convidados.service.constantes.ConvidadosConstantes
 import kotlinx.android.synthetic.main.activity_form_convidados.*
 
 class FormConvidados : AppCompatActivity() {
 
     private lateinit var mViewModel: FormConvidadosViewModel
+    private var mConvidadoId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +26,19 @@ class FormConvidados : AppCompatActivity() {
             nome = nome.capitalize()
             validacao(nome)
         }
+
         observe()
+        loadData()
+
+    }
+
+    private fun loadData() {
+        val bundle = intent.extras
+        if (bundle != null) {
+            mConvidadoId = bundle.getInt(ConvidadosConstantes.CONVIDADOID)
+
+            mViewModel.load(mConvidadoId)
+        }
     }
 
     private fun validacao(nome: String) {
@@ -33,12 +47,12 @@ class FormConvidados : AppCompatActivity() {
 
                 var presente = rdPresente.isChecked
 
-                mViewModel.salvar(nome, presente)
+                mViewModel.salvar(mConvidadoId, nome, presente)
             } else if (rdAusente.isChecked) {
 
                 var ausente = false
 
-                mViewModel.salvar(nome, ausente)
+                mViewModel.salvar(mConvidadoId, nome, ausente)
             } else {
                 Toast.makeText(
                     applicationContext,
@@ -59,6 +73,14 @@ class FormConvidados : AppCompatActivity() {
                 Toast.makeText(applicationContext, "sucesso", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(applicationContext, "falha", Toast.LENGTH_SHORT).show()
+            }
+        })
+        mViewModel.convidado.observe(this, Observer {
+            edtNome.setText(it.nome)
+            if (it.presenca) {
+                rdPresente.isChecked = true
+            } else {
+                rdAusente.isChecked = true
             }
         })
     }

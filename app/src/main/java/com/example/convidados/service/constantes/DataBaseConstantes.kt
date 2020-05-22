@@ -1,6 +1,6 @@
-package com.example.convidados.service.repository
+package com.example.convidados.service.constantes
 
-class DataBaseConstants private constructor() {
+class DataBaseConstantes private constructor() {
 
     object PESSOA {
 

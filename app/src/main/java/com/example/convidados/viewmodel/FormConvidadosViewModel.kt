@@ -4,25 +4,35 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.convidados.service.model.PessoaModel
-import com.example.convidados.service.repository.PessoaRepository
+import com.example.convidados.service.model.ConvidadoModel
+import com.example.convidados.service.repository.ConvidadoRepository
 
 class FormConvidadosViewModel(application: Application) : AndroidViewModel(application) {
 
     private val mContext = application.applicationContext
-    private val mPessoaRepository: PessoaRepository =
-        PessoaRepository.getInstance(mContext)
+    private val mConvidadoRepository: ConvidadoRepository =
+        ConvidadoRepository.getInstance(mContext)
 
     private var mSaveGuest = MutableLiveData<Boolean>()
     val saveGuest: LiveData<Boolean> = mSaveGuest
 
-    fun salvar(nome: String, presenca: Boolean) {
+    private var mConvidado = MutableLiveData<ConvidadoModel>()
+    val convidado: LiveData<ConvidadoModel> = mConvidado
+
+    fun salvar(id: Int, nome: String, presenca: Boolean) {
 
         val pessoa =
-            PessoaModel(nome = nome, presenca = presenca)
+            ConvidadoModel(id, nome, presenca)
 
-        mSaveGuest.value = mPessoaRepository.salvarPessoa(pessoa)
+        if (id == 0) {
+            mSaveGuest.value = mConvidadoRepository.salvarPessoa(pessoa)
+        } else {
+            mSaveGuest.value = mConvidadoRepository.atualizarPessoa(pessoa)
+        }
+    }
+
+    fun load(id: Int) {
+        mConvidado.value = mConvidadoRepository.listarUsuarioId(id)
     }
 
 }

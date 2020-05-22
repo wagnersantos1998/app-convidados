@@ -3,6 +3,7 @@ package com.example.convidados.service.repository
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.convidados.service.constantes.DataBaseConstantes
 
 class Database(context: Context) : SQLiteOpenHelper(context, NOME_BANCO, null, VERSAO) {
     override fun onCreate(db: SQLiteDatabase) {
@@ -18,9 +19,9 @@ class Database(context: Context) : SQLiteOpenHelper(context, NOME_BANCO, null, V
         private const val VERSAO = 1
 
         private const val CREATE_TABLE =
-            ("create table " + DataBaseConstants.PESSOA.TABLE_NAME + " ("
-                    + DataBaseConstants.PESSOA.COLUNAS.ID + " integer primary key autoincrement, "
-                    + DataBaseConstants.PESSOA.COLUNAS.NOME + " text, "
-                    + DataBaseConstants.PESSOA.COLUNAS.PRESENCA + " integer);")
+            ("create table " + DataBaseConstantes.PESSOA.TABLE_NAME + " ("
+                    + DataBaseConstantes.PESSOA.COLUNAS.ID + " integer primary key autoincrement, "
+                    + DataBaseConstantes.PESSOA.COLUNAS.NOME + " text, "
+                    + DataBaseConstantes.PESSOA.COLUNAS.PRESENCA + " integer);")
     }
 }

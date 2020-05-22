@@ -4,16 +4,15 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.convidados.service.model.PessoaModel
-import com.example.convidados.service.repository.PessoaRepository
+import com.example.convidados.service.model.ConvidadoModel
+import com.example.convidados.service.repository.ConvidadoRepository
 
 class TodosConvidadosViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val mRepository = PessoaRepository.getInstance(application)
+    private val mRepository = ConvidadoRepository.getInstance(application)
 
-    private val mListaPessoa = MutableLiveData<List<PessoaModel>>()
-    val pessoaLista: LiveData<List<PessoaModel>> = mListaPessoa
+    private val mListaPessoa = MutableLiveData<List<ConvidadoModel>>()
+    val convidadoLista: LiveData<List<ConvidadoModel>> = mListaPessoa
 
     fun carregarListaConvidados() {
 
