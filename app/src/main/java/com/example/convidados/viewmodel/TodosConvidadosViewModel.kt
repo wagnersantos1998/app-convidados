@@ -19,4 +19,8 @@ class TodosConvidadosViewModel(application: Application) : AndroidViewModel(appl
         mListaPessoa.value = mRepository.listarTodasPessoa()
     }
 
+    fun deletarConvidado(id: Int) {
+        mRepository.deletarPessoa(id)
+    }
+
 }

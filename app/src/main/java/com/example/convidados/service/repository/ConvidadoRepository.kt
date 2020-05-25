@@ -58,12 +58,12 @@ class ConvidadoRepository private constructor(context: Context) {
         }
     }
 
-    fun deletarPessoa(convidadoModel: ConvidadoModel): Boolean {
+    fun deletarPessoa(id: Int): Boolean {
         return try {
             val db = mDatabase.writableDatabase
 
             val selecao = DataBaseConstantes.PESSOA.COLUNAS.ID + " = ?"
-            val args = arrayOf(convidadoModel.id.toString())
+            val args = arrayOf(id.toString())
 
             db.delete(DataBaseConstantes.PESSOA.TABLE_NAME, selecao, args)
 

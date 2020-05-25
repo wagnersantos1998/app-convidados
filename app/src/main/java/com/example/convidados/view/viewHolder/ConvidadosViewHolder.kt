@@ -1,6 +1,9 @@
 package com.example.convidados.view.viewHolder
 
+import android.app.AlertDialog
+import android.opengl.Visibility
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.convidados.R
@@ -17,6 +20,8 @@ class ConvidadosViewHolder(itemView: View, private val listener: ConvidadoListen
         val presenca = itemView.findViewById<TextView>(R.id.txtPresenca)
         presenca.text = "Presença: ${convidado.presenca}"
 
+        val btnDeletar = itemView.findViewById<Button>(R.id.btnDeletar)
+
         nome.setOnClickListener {
             listener.onClick(convidado.id)
         }
@@ -24,7 +29,27 @@ class ConvidadosViewHolder(itemView: View, private val listener: ConvidadoListen
         presenca.setOnClickListener {
             listener.onClick(convidado.id)
         }
+        nome.setOnLongClickListener {
 
+            btnDeletar.visibility = View.VISIBLE
+
+            true
+        }
+
+        presenca.setOnClickListener {
+
+            btnDeletar.visibility = View.VISIBLE
+
+            true
+        }
+        btnDeletar.setOnClickListener {
+            AlertDialog.Builder(itemView.context).setTitle(R.string.remocao_convidado)
+                .setMessage(R.string.deseja_remover)
+                .setPositiveButton(R.string.remover) { dialog, which ->
+                    listener.onDelete(convidado.id)
+                }
+                .setNeutralButton(R.string.cancelar, null).show()
+        }
     }
 
 }

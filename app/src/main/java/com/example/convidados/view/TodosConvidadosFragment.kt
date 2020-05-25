@@ -45,6 +45,11 @@ class TodosConvidadosFragment : Fragment() {
                 startActivity(intent)
 
             }
+
+            override fun onDelete(id: Int) {
+                todosConvidadosViewModel.deletarConvidado(id)
+                todosConvidadosViewModel.carregarListaConvidados()
+            }
         }
 
         mAdapter.attachListener(mListener)

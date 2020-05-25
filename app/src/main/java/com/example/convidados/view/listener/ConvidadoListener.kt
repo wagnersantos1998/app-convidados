@@ -4,4 +4,7 @@ interface ConvidadoListener {
     fun onClick(id: Int){
 
     }
+    fun onDelete(id: Int){
+
+    }
 }
