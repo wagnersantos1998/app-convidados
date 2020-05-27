@@ -48,21 +48,21 @@ class TodosConvidadosFragment : Fragment() {
 
             override fun onDelete(id: Int) {
                 todosConvidadosViewModel.deletarConvidado(id)
-                todosConvidadosViewModel.carregarListaConvidados()
+                todosConvidadosViewModel.carregarListaConvidados(ConvidadosConstantes.FILTROS.TODOS)
             }
         }
 
         mAdapter.attachListener(mListener)
         observer()
 
-        todosConvidadosViewModel.carregarListaConvidados()
+        todosConvidadosViewModel.carregarListaConvidados(ConvidadosConstantes.FILTROS.TODOS)
 
         return root
     }
 
     override fun onResume() {
         super.onResume()
-        todosConvidadosViewModel.carregarListaConvidados()
+        todosConvidadosViewModel.carregarListaConvidados(ConvidadosConstantes.FILTROS.TODOS)
     }
 
     private fun observer() {

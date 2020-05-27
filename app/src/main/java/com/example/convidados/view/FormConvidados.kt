@@ -1,13 +1,13 @@
 package com.example.convidados.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.convidados.viewmodel.FormConvidadosViewModel
 import com.example.convidados.R
 import com.example.convidados.service.constantes.ConvidadosConstantes
+import com.example.convidados.viewmodel.FormConvidadosViewModel
 import kotlinx.android.synthetic.main.activity_form_convidados.*
 
 class FormConvidados : AppCompatActivity() {

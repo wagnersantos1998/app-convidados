@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.convidados.service.constantes.ConvidadosConstantes
 import com.example.convidados.service.model.ConvidadoModel
 import com.example.convidados.service.repository.ConvidadoRepository
 
@@ -14,9 +15,18 @@ class TodosConvidadosViewModel(application: Application) : AndroidViewModel(appl
     private val mListaPessoa = MutableLiveData<List<ConvidadoModel>>()
     val convidadoLista: LiveData<List<ConvidadoModel>> = mListaPessoa
 
-    fun carregarListaConvidados() {
+    fun carregarListaConvidados(filtro: Int) {
 
-        mListaPessoa.value = mRepository.listarTodasPessoa()
+        if (filtro == ConvidadosConstantes.FILTROS.TODOS) {
+
+            mListaPessoa.value = mRepository.listarTodasPessoa()
+
+        } else if (filtro == ConvidadosConstantes.FILTROS.PRESENTES) {
+            mListaPessoa.value = mRepository.listarPessoaPresente()
+        } else {
+            mListaPessoa.value = mRepository.listarPessoaAusente()
+        }
+
     }
 
     fun deletarConvidado(id: Int) {
